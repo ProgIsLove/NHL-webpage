@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create new Team</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="/webjars/jquery/4.5.2/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="bg-dark container-fluid overflow-hidden" style="min-height: 100vh">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" th:href="@{/nhl}">
+                <img class="logo" src="../static/resources/images/nhl-logo.png" alt="logo"
+                     th:src="@{/resources/images/nhl-logo.png}"
+                     style="width: 50px; height: 50px"></a>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="#"
+                       th:href="@{'/nhl/playerstatistic'}">Player Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{'/nhl/teamstatistic'}">Team Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{'/nhl/division'}">Division Stats</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid bg-dark mt-5">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-3">
+                <form th:object="${team}" method="post">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="panel-group">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h1 class="panel-title text-light" style="text-align: center;padding: 20px;">Create New
+                                    Team</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+
+                                    <label class="text-light col-sm-3 col-form-label">Team Name:</label>
+                                    <div class="form-group col-sm-3">
+                                        <input type="text" class="form-control" th:field="*{teamName}"/>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

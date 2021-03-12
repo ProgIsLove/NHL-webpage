@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NHL</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="/webjars/jquery/4.5.2/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+            crossorigin="anonymous"></script>
+    <!-- Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
+
+    <style>
+        .card-flip > div {
+            backface-visibility: hidden;
+            transition: transform 300ms;
+            transition-timing-function: linear;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-front {
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            position: absolute;
+        }
+
+        .card-flip:hover .card-front {
+            transform: rotateY(-180deg);
+        }
+
+        .card-flip:hover .card-back {
+            transform: rotateY(0deg);
+        }
+
+        .header-color-front:hover {
+            background-color: transparent;
+            background-color: #0892d0;
+        }
+
+        .header-color-back {
+            background-color: transparent;
+            background-color: #0892d0;
+        }
+
+        .anchor-color:hover {
+            text-decoration: none;
+            cursor: auto;
+        }
+
+        .my-custom-scrollbar {
+            position: relative;
+            height: 190px;
+            overflow: auto;
+        }
+
+        #scrollbar-style::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #scrollbar-style::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        #scrollbar-style::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            background-color: #f66733;
+        }
+
+        .header {
+            height: 10rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="p-3 bg-dark container-fluid" style="min-height: 100vh">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" th:href="@{/nhl}">
+                <img src="../static/resources/images/nhl-logo.png" alt="logo" th:src="@{/resources/images/nhl-logo.png}"
+                     style="width: 50px; height: 50px"></a>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="#" th:href="@{'/nhl/playerstatistic'}">Player Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{'/nhl/teamstatistic'}">Team Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{'/nhl/division'}">Division Stats</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid bg-dark mt-5">
+        <div class="header" th:each="teams : ${team.getTeamName()}">
+            <h1 class="text-light" th:text="${teams}">Team</h1>
+        </div>
+        <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3"
+             style="justify-content: center;flex: border-box;align-items: center">
+
+            <div class="card card-flip bg-secondary" th:each="players : ${team.getPlayerAndTeams()}"
+                 style="max-width: 15rem; margin: 10px;min-height: 15rem;">
+                <div class="card-front">
+                    <a class="anchor-color">
+                        <div class="card-header header-color-front text-light"
+                             th:text="${players.getPlayer().getName()+ ' ' +players.getPlayer().getSurname()}"
+                             style="text-align: center;;font-weight: bold">Header
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <p class="text-light" th:text="${players.getPlayer().getPosition().position}"
+                           style="text-align: center">Position</p>
+                        <img class="card-img-top" src="../static/resources/images/player.png" alt="hockey-player"
+                             th:src="@{/resources/images/player.png}" style="height: 110px">
+                    </div>
+                </div>
+                <div class="card-back">
+                    <a class="anchor-color" href="#">
+                        <div class="card-header header-color-back text-light"
+                             th:text="${players.getPlayer().getName()+ ' ' +players.getPlayer().getSurname()}"
+                             style="text-align: center;font-weight: bold">Header
+                        </div>
+                    </a>
+                    <div class="my-custom-scrollbar" id="scrollbar-style">
+                        <table class="table text-light" th:if="${not #lists.isEmpty(players.getPlayerStatistics())}"
+                               style="margin: 0px">
+                            <tbody th:each="playerStatistic :${players.getPlayerStatistics()}">
+                            <tr th:remove="${playerStatistic.getStartSeason() == null}? all : none">
+                                <th style="font-weight: normal">Start</th>
+                                <td th:text="${playerStatistic.getStartSeason()}">10</td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getEndSeason() == null}? all : none">
+                                <th style="font-weight: normal">End</th>
+                                <td th:text="${playerStatistic.getEndSeason()}">10</td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getGoals() == null}? all : none">
+                                <th style="font-weight: normal">Goals</th>
+                                <td th:text="${playerStatistic.getGoals()}">10</td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getAssists() == null}? all : none">
+                                <th style="font-weight: normal">Assists</th>
+                                <td th:text="${playerStatistic.getAssists()}"></td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getPoints() == null}? all : none">
+                                <th style="font-weight: normal">Points</th>
+                                <td th:text="${playerStatistic.getPoints()}">20</td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getPlusMinus() == null}? all : none">
+                                <th style="font-weight: normal">Plus/Minus</th>
+                                <td th:text="${playerStatistic.getPlusMinus()}">5</td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getGoalsAgainst() == null}? all : none">
+                                <th style="font-weight: normal">GA</th>
+                                <td th:text="${playerStatistic.getGoalsAgainst()}"></td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getShutouts() == null}? all : none">
+                                <th style="font-weight: normal">Shutouts</th>
+                                <td th:text="${playerStatistic.getShutouts()}">5</td>
+                            </tr>
+                            <tr th:remove="${playerStatistic.getSaves() == null}? all : none">
+                                <th style="font-weight: normal">Save %</th>
+                                <td th:text="${playerStatistic.getSaves()}">5</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin-top: 5rem">
+        <a class="btn btn-light text-dark font-weight-bold" href="#" th:href="@{'/nhl/division/' + ${division.id} + '/'+${team.id} + '/teamstatistic/new'}" role="button">Create New Team Statistic</a>
+
+    </div>
+</div>
+</body>
+</html>

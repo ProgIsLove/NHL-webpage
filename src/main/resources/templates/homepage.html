@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NHL</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="/webjars/jquery/4.5.2/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+            crossorigin="anonymous"></script>
+    <style>
+        .anchor-color:hover {
+            text-decoration: none;
+            background-color: transparent;
+            background-color: #0892d0;
+        }
+    </style>
+
+</head>
+<body>
+<div class="p-3 bg-dark container-fluid" style="min-height: 100vh">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" th:href="@{/nhl}">
+                <img class="logo" src="../static/resources/images/nhl-logo.png" alt="logo" th:src="@{/resources/images/nhl-logo.png}"
+                     style="width: 50px; height: 50px"></a>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="#" th:href="@{/nhl/playerstatistic}">Player Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{/nhl/teamstatistic}">Team Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{/nhl/division}">Division Stats</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid bg-dark mt-5" th:if="${not #lists.isEmpty(teams)}">
+        <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3"
+             style="justify-content: center;flex: border-box;align-items: center">
+            <div class="card bg-secondary" th:each="team : ${teams}" style="max-width: 15rem;margin: 10px;">
+                <a class="anchor-color" href="#" th:href="@{'/nhl/division/' + ${team.getDivision().id} + '/' +${team.id}}">
+                    <div class="card-header text-light" th:text="${team.getTeamName()}"
+                         style="text-align: center;">Header
+                    </div>
+                </a>
+                <div class="card-body">
+                    <img src="..." class="card-img-top" alt="..." th:src="@{/resources/images/nhl-logo.png}"
+                         width="200" height="200">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+

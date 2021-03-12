@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="/webjars/jquery/4.5.2/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+            crossorigin="anonymous"></script>
+    <style>
+        tr:nth-child(even) {
+            background-color: #5cb85c;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="p-3 bg-dark container-fluid" style="min-height: 100vh">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" th:href="@{/nhl}">
+                <img src="../static/resources/images/nhl-logo.png" alt="logo" th:src="@{/resources/images/nhl-logo.png}"
+                     style="width: 50px; height: 50px"></a>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="#"
+                       th:href="@{'/nhl/playerstatistic'}">Player Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{'/nhl/teamstatistic'}">Team Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light " href="#" th:href="@{'/nhl/division'}">Division Stats</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top: 5rem" th:if="${not #lists.isEmpty(playerstatistic)}">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-dark">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th scope="col">Player</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Team</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Goals</th>
+                            <th scope="col">Assists</th>
+                            <th scope="col">Points</th>
+                            <th scope="col">Plus/Minus</th>
+                            <th scope="col">Saves</th>
+                            <th scope="col">Shutouts</th>
+                            <th scope="col">Goals Against</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="stat : ${playerstatistic}">
+                        <tr th:class="${statStat.index % 2 == 0} ? 'bg-success' : 'bg-dark'">
+                            <td th:text="${stat.getPlayerAndTeam().getPlayer().name} + ' ' + ${stat.getPlayerAndTeam().getPlayer().surname}">
+                                Sidney Crosby
+                            </td>
+                            <td th:text="${stat.getStartSeason()} + ' - ' + ${stat.getEndSeason()}">Year</td>
+                            <td th:text="${stat.getPlayerAndTeam().getTeam().teamName}">Pittsburg</td>
+                            <td th:text="${stat.getPlayerAndTeam().getPlayer().getPosition().position}">Center</td>
+                            <td th:text="${stat.getGoals()}?: 0">13</td>
+                            <td th:text="${stat.getAssists()}?: 0">10</td>
+                            <td th:text="${stat.getPoints()}?: 0">23</td>
+                            <td th:text="${stat.getPlusMinus()}?: 0">34</td>
+                            <td th:text="${stat.getSaves()}?: 0">0</td>
+                            <td th:text="${stat.getShutouts()}?: 0">0</td>
+                            <td th:text="${stat.getGoalsAgainst()}?: 0">0</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
