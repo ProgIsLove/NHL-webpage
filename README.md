@@ -105,32 +105,32 @@ The following items should be installed in your system:
         "saves": null
      }
      
-    POST localhost:8080/api/nhl/playerstatistic/16/update => in Body section, tick raw, select JSON and write
+     POST localhost:8080/api/nhl/playerstatistic/16/update => in Body section, tick raw, select JSON and write
      
-    {"id": 16,
-      "player": {
-        "id": 16,
-        "name": "name",
-        "surname": "surname",
-        "nationality": "nat"
-    },
-    "playerAndTeam": {
+     {"id": 16,
+       "player": {
+         "id": 16,
+         "name": "name",
+         "surname": "surname",
+         "nationality": "nat"
+     },
+     "playerAndTeam": {
         "id": 16,
         "playerContractStart": "YYYY-MM-DD",
         "playerContractEnd": "YYYY-MM-DD"
-    },
-    "startSeason": "YYYY-MM-DD",
-    "endSeason": "YYYY-MM-DD",
-    "goals": 55,
-    "assists": 13,
-    "points": 68,
-    "plusMinus": 10,
-    "goalsAgainst": null,
-    "shutouts": null,
-    "saves": null
-    }
+     },
+     "startSeason": "YYYY-MM-DD",
+     "endSeason": "YYYY-MM-DD",
+     "goals": 55,
+     "assists": 13,
+     "points": 68,
+     "plusMinus": 10,
+     "goalsAgainst": null,
+     "shutouts": null,
+     "saves": null
+     }
 
-    POST localhost:8080/api/nhl/playerandteam/16/update => in Body section, tick raw, select JSON and write
+     POST localhost:8080/api/nhl/playerandteam/16/update => in Body section, tick raw, select JSON and write
      
      {        
        "id":16,
@@ -146,7 +146,7 @@ The following items should be installed in your system:
             "id":20,
             "team":	"team name"
         }
-    }  
+     }  
      
      ```
      
