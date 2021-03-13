@@ -27,7 +27,7 @@ The following items should be installed in your system:
     ${yourPath}/nhl>mvn spring-boot:run
     
     ```
-##  Visit http://localhost:8080/nhl in your browser Or visit H2 db => http://localhost:8080/h2-console/
+###  Visit http://localhost:8080/nhl in your browser Or visit H2 db => http://localhost:8080/h2-console/
   
   3) Open Postman or Insomnia rest and try these commands
      ```
