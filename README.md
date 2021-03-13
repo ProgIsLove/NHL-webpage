@@ -61,8 +61,7 @@ The following items should be installed in your system:
         "position": {
             "id": 1
         }
-    }
-     
+     }
      
      POST localhost:8080/api/nhl/playerandteam/new => in Body section, tick raw, select JSON and write
      
@@ -79,10 +78,10 @@ The following items should be installed in your system:
             "id":31,
             "teamName": "teamName"
         }    
-    }
-     
+     }
      
      POST localhost:8080/api/nhl/playerstatistic/new => in Body section, tick raw, select JSON and write
+     
          {   
         "player": {
             "id": 30,
@@ -104,12 +103,9 @@ The following items should be installed in your system:
         "goalsAgainst": null,
         "shutouts": null,
         "saves": null
-    }
+     }
      
-     
-     
-     
-     POST localhost:8080/api/nhl/playerstatistic/16/update => in Body section, tick raw, select JSON and write
+    POST localhost:8080/api/nhl/playerstatistic/16/update => in Body section, tick raw, select JSON and write
      
     {"id": 16,
       "player": {
@@ -132,10 +128,9 @@ The following items should be installed in your system:
     "goalsAgainst": null,
     "shutouts": null,
     "saves": null
-}
+    }
 
-     
-     POST localhost:8080/api/nhl/playerandteam/16/update => in Body section, tick raw, select JSON and write
+    POST localhost:8080/api/nhl/playerandteam/16/update => in Body section, tick raw, select JSON and write
      
      {        
        "id":16,
@@ -154,6 +149,5 @@ The following items should be installed in your system:
     }  
      
      ```
-     
      
  5) Enjoy <3
