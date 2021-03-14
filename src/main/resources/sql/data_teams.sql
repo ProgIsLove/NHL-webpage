@@ -54,7 +54,7 @@ Values ('13', 'Detroit Red Wings', '3')
 ;
 Insert into team
     (id, team_name, division_id)
-Values ('14', 'Montréal Canadiens', '1')
+Values ('14', 'Montreal Canadiens', '1')
 ;
 Insert into team
     (id, team_name, division_id)
