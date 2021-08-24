@@ -1,6 +1,6 @@
 # NHL-webpage
 
-## Working with Recipe book in your IDE
+## Working with NHL webpage in your IDE
 
 ### Prerequisites
 The following items should be installed in your system:
